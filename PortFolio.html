@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aman Mehta — Aspiring Frontend Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f7f6f2;
+  --bg2:       #eeecea;
+  --surface:   #ffffff;
+  --border:    #e2dfd8;
+  --border2:   #cac6be;
+  --text:      #1a1814;
+  --muted:     #7a7670;
+  --subtle:    #a8a49e;
+  --accent:    #1A56DB;
+  --accent-bg: #eef3fd;
+  --accent2:   #0e3fa8;
+  --green:     #16a34a;
+  --green-bg:  #f0fdf4;
+  --amber:     #b45309;
+  --amber-bg:  #fffbeb;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NAV ───────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 2.5rem;
+  height: 60px;
+  display: flex; align-items: center;
+  background: rgba(247,246,242,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1080px; margin: 0 auto; width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--accent); }
+
+nav ul { list-style: none; display: flex; gap: 2rem; }
+nav ul a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+nav ul a:hover { color: var(--text); }
+
+.nav-cta {
+  background: var(--accent);
+  color: #fff !important;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 0.78rem !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--accent2) !important; color: #fff !important; }
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 80px 2.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-dots {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle, rgba(26,86,219,0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.hero-blob {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,86,219,0.07) 0%, transparent 70%);
+  top: -100px; right: -150px; z-index: 0;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative; z-index: 1;
+  max-width: 1080px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: center;
+}
+
+@media (max-width: 860px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-card { display: none; }
+}
+
+.hero-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent-bg);
+  border: 1px solid rgba(26,86,219,0.2);
+  border-radius: 100px;
+  padding: 5px 14px 5px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.6rem;
+  animation: fadeUp 0.5s ease both;
+}
+
+.pill-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; } 50% { opacity:0.3; }
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  animation: fadeUp 0.5s 0.08s ease both;
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  margin-top: 1.6rem;
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 500px;
+  line-height: 1.8;
+  animation: fadeUp 0.5s 0.16s ease both;
+  font-weight: 400;
+}
+
+.hero-cta {
+  margin-top: 2.2rem;
+  display: flex; gap: 0.8rem; flex-wrap: wrap;
+  animation: fadeUp 0.5s 0.24s ease both;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.2s;
+  cursor: pointer; border: none;
+}
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,86,219,0.25); }
+
+.btn-outline { background: var(--surface); color: var(--muted); border: 1.5px solid var(--border2); }
+.btn-outline:hover { color: var(--text); border-color: var(--accent); background: var(--accent-bg); }
+
+/* Hero card */
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  animation: fadeUp 0.5s 0.32s ease both;
+}
+
+.hc-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.hc-role { font-size: 0.8rem; color: var(--muted); margin-bottom: 1.4rem; }
+
+.hc-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.82rem; color: var(--muted);
+}
+.hc-row:last-child { border-bottom: none; }
+.hc-row strong { color: var(--text); font-weight: 600; margin-left: auto; text-align: right; font-size: 0.8rem; }
+.hc-icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+
+.hc-badge {
+  display: inline-block;
+  margin-top: 1.2rem;
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid rgba(22,163,74,0.2);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:none; }
+}
+
+/* ── SECTIONS ───────────────────────────────── */
+section { padding: 5rem 2.5rem; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+  color: var(--text);
+}
+
+.divider { height: 1px; background: var(--border); }
+
+/* ── ABOUT ───────────────────────────────────── */
+#about { background: var(--surface); }
+
+.about-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 5rem; align-items: start;
+}
+@media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+.about-text {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--muted);
+  font-weight: 400;
+}
+.about-text + .about-text { margin-top: 1.2rem; }
+.about-text strong { color: var(--text); font-weight: 600; }
+
+.stat-stack { display: flex; flex-direction: column; gap: 1rem; }
+
+.stat-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover {
+  border-color: rgba(26,86,219,0.3);
+  box-shadow: 0 2px 12px rgba(26,86,219,0.06);
+}
+
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 900;
+  color: var(--accent);
+  min-width: 56px;
+}
+.stat-label { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+/* ── SKILLS ─────────────────────────────────── */
+#skills { background: var(--bg); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 700px) { .skills-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .skills-grid { grid-template-columns: 1fr; } }
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+.skill-card:hover {
+  border-color: rgba(26,86,219,0.25);
+  box-shadow: 0 4px 16px rgba(26,86,219,0.06);
+  transform: translateY(-2px);
+}
+
+.skill-icon-wrap {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.skill-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.skill-items { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+
+/* ── PROJECTS ────────────────────────────────── */
+#projects { background: var(--surface); }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: all 0.25s;
+}
+.project-card:hover {
+  border-color: rgba(26,86,219,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26,86,219,0.08);
+}
+
+.project-top {
+  padding: 1.5rem 1.5rem 0;
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+
+.project-icon-box {
+  width: 48px; height: 48px;
+  background: var(--accent-bg);
+  border: 1px solid rgba(26,86,219,0.15);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+}
+
+.project-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem; font-weight: 500;
+  color: var(--subtle);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 5px;
+  letter-spacing: 0.06em;
+}
+
+.project-body { padding: 1.2rem 1.5rem; flex: 1; }
+
+.project-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; font-weight: 700;
+  margin-bottom: 0.5rem; color: var(--text);
+}
+.project-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.1rem; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.67rem;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid rgba(26,86,219,0.15);
+  letter-spacing: 0.03em;
+}
+
+.project-foot {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.project-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none;
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.03em;
+  transition: gap 0.2s;
+}
+.project-link:hover { gap: 10px; }
+
+/* ── EDUCATION ──────────────────────────────── */
+#education { background: var(--bg); }
+
+.edu-list { display: flex; flex-direction: column; }
+
+.edu-item {
+  display: grid; grid-template-columns: 90px 1fr;
+  gap: 2rem; padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.edu-item:last-child { border-bottom: none; }
+
+.edu-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; font-weight: 500;
+  color: var(--subtle);
+  letter-spacing: 0.06em;
+  padding-top: 3px;
+  line-height: 1.5;
+}
+
+.edu-degree {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.25rem;
+}
+.edu-school { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.5rem; }
+
+.edu-badge {
+  display: inline-block;
+  font-size: 0.68rem; font-weight: 600;
+  padding: 3px 10px; border-radius: 5px;
+  letter-spacing: 0.04em;
+}
+.badge-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(22,163,74,0.2); }
+.badge-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(180,83,9,0.2); }
+.badge-blue  { background: var(--accent-bg); color: var(--accent); border: 1px solid rgba(26,86,219,0.2); }
+
+/* ── ACHIEVEMENTS ───────────────────────────── */
+#achievements { background: var(--surface); }
+
+.achieve-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 680px) { .achieve-grid { grid-template-columns: 1fr; } }
+
+.achieve-card {
+  display: flex; gap: 1rem;
+  padding: 1.3rem 1.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  align-items: flex-start;
+}
+.achieve-card:hover {
+  border-color: rgba(26,86,219,0.2);
+  box-shadow: 0 2px 12px rgba(26,86,219,0.05);
+}
+
+.achieve-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 900;
+  color: var(--accent); opacity: 0.3;
+  flex-shrink: 0; line-height: 1;
+  padding-top: 2px;
+}
+.achieve-body { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+.achieve-body strong { color: var(--text); font-weight: 600; }
+
+/* ── CONTACT ────────────────────────────────── */
+#contact { background: var(--bg); }
+
+.contact-wrap {
+  max-width: 700px; margin: 0 auto; text-align: center;
+}
+.contact-wrap .section-title { margin-bottom: 0.8rem; }
+
+.contact-sub { color: var(--muted); font-size: 0.92rem; margin-bottom: 2.5rem; }
+
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+@media (max-width: 500px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.contact-card {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+  padding: 1rem 1.3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.contact-card:hover {
+  color: var(--accent);
+  border-color: rgba(26,86,219,0.3);
+  background: var(--accent-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26,86,219,0.08);
+}
+.contact-icon {
+  width: 32px; height: 32px;
+  background: var(--bg);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0;
+}
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  padding: 1.8rem 2.5rem;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--subtle);
+  letter-spacing: 0.05em;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ── SCROLL REVEAL ───────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">AM<span>.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-dots"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-pill"><span class="pill-dot"></span> Open to Internships &amp; Entry-Level Roles</div>
+      <h1>Aspiring<br><em>Frontend</em><br>Developer.</h1>
+      <p class="hero-sub">
+        MCA student at PES University, Bengaluru — building clean, interactive web experiences with React.js &amp; modern JavaScript.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work →</a>
+        <a href="Aman_Mehta_Resume.pdf" download class="btn btn-outline">⬇ Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-name">Aman Mehta</div>
+      <div class="hc-role">Frontend Developer · React.js · MCA</div>
+      <div class="hc-row"><span class="hc-icon">📍</span> Location <strong>Bengaluru, KA</strong></div>
+      <div class="hc-row"><span class="hc-icon">🎓</span> Degree <strong>MCA @ PES University</strong></div>
+      <div class="hc-row"><span class="hc-icon">⭐</span> BCA CGPA <strong>8.2 / 10</strong></div>
+      <div class="hc-row"><span class="hc-icon">🏆</span> Award <strong>MRD Merit Certificate</strong></div>
+      <div class="hc-row"><span class="hc-icon">💻</span> Stack <strong>React · JS · CSS3</strong></div>
+      <div class="hc-badge">✓ Available for Opportunities</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow">01 — About</div>
+    <div class="section-title">Who I Am</div>
+    <div class="about-grid reveal">
+      <div>
+        <p class="about-text">
+          Motivated and detail-oriented developer with a strong foundation in <strong>frontend development</strong>. Passionate about building <strong>clean, user-friendly</strong> web interfaces that are both functional and visually engaging.
+        </p>
+        <p class="about-text" style="margin-top:1.2rem">
+          Currently pursuing my <strong>MCA at PES University</strong>, Bengaluru, deepening my knowledge of algorithms, data structures, and modern web technologies. I thrive in collaborative environments and love turning ideas into reality through code.
+        </p>
+      </div>
+      <div class="stat-stack">
+        <div class="stat-card">
+          <div class="stat-num">8.2</div>
+          <div class="stat-label">CGPA in BCA — Top 10% of batch at IPS Academy, Indore</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Live project shipped — AlgoViz algorithm visualizer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">24h</div>
+          <div class="stat-label">Hackathon — built a prototype task manager in 24 hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-eyebrow">02 — Skills</div>
+    <div class="section-title">Tech Stack</div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <div class="skill-icon-wrap" style="background:#fffbeb; color:#b45309;">⚡</div>
+        <div class="skill-name">Languages</div>
+        <div class="skill-items">JavaScript (ES6+) · Python · Java</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap" style="background:#eff6ff; color:#2563eb;">🌐</div>
+        <div class="skill-name">Frontend</div>
+        <div class="skill-items">HTML5 · CSS3 · React.js</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap" style="background:#eef3fd; color:#1A56DB;">📦</div>
+        <div class="skill-name">React Ecosystem</div>
+        <div class="skill-items">React Router · React Hooks · State Management</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap" style="background:#f0fdf4; color:#16a34a;">🔧</div>
+        <div class="skill-name">Tools &amp; Workflow</div>
+        <div class="skill-items">Git · GitHub · VS Code</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap" style="background:#fef2f2; color:#dc2626;">🗄️</div>
+        <div class="skill-name">Databases</div>
+        <div class="skill-items">MySQL · MongoDB</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap" style="background:#f5f3ff; color:#7c3aed;">🧠</div>
+        <div class="skill-name">CS Fundamentals</div>
+        <div class="skill-items">DSA · Sorting &amp; Searching Algorithms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-eyebrow">03 — Projects</div>
+    <div class="section-title">What I've Built</div>
+    <div class="projects-grid reveal">
+      <div class="project-card">
+        <div class="project-top">
+          <div class="project-icon-box">📊</div>
+          <span class="project-year">2025</span>
+        </div>
+        <div class="project-body">
+          <div class="project-name">AlgoViz</div>
+          <p class="project-desc">
+            Interactive algorithm visualizer demonstrating sorting &amp; searching with animated bars.
+            Features Bubble Sort, Selection Sort, Insertion Sort, Linear &amp; Binary Search with
+            adjustable speed controls and a fully responsive UI.
+          </p>
+          <div class="tags">
+            <span class="tag">React.js</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">React Router</span>
+          </div>
+        </div>
+        <div class="project-foot">
+          <a href="https://github.com/Amanmehta11/AlgoViz" target="_blank" class="project-link">
+            View on GitHub →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-eyebrow">04 — Education</div>
+    <div class="section-title">Academic Journey</div>
+    <div class="edu-list reveal">
+      <div class="edu-item">
+        <div class="edu-year">2025 –<br>2027</div>
+        <div>
+          <div class="edu-degree">MCA — Master of Computer Applications</div>
+          <div class="edu-school">PES University, Bengaluru</div>
+          <span class="edu-badge badge-green">Currently Pursuing</span>
+          <span class="edu-badge badge-amber" style="margin-left:6px">MRD Merit Certificate · Sem 1, 2025</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">2021 –<br>2024</div>
+        <div>
+          <div class="edu-degree">BCA — Bachelor of Computer Applications</div>
+          <div class="edu-school">IPS Academy, Indore</div>
+          <span class="edu-badge badge-blue">CGPA: 8.2 · Top 10% of Batch</span>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-year">Prior<br>2021</div>
+        <div>
+          <div class="edu-degree">10+2 — Commerce Stream</div>
+          <div class="edu-school">KV Neemuch · CBSE Board</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="section-eyebrow">05 — Achievements</div>
+    <div class="section-title">Highlights</div>
+    <div class="achieve-grid reveal">
+      <div class="achieve-card">
+        <div class="achieve-num">01</div>
+        <div class="achieve-body">Awarded the <strong>MRD Merit Certificate</strong> in Semester 1 at PES University, Bengaluru (2025)</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">02</div>
+        <div class="achieve-body">Secured <strong>8.2 CGPA</strong> in BCA from IPS Academy, Indore — ranked in the <strong>Top 10%</strong> of the batch</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">03</div>
+        <div class="achieve-body">Participated in a <strong>24-hour college-level Hackathon</strong>, building a prototype task manager app from scratch</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-num">04</div>
+        <div class="achieve-body">Built and shipped <strong>AlgoViz</strong>, a fully functional React-based algorithm visualizer — available on GitHub</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <div class="section-eyebrow" style="text-align:center">06 — Contact</div>
+      <div class="section-title reveal">Let's Connect</div>
+      <p class="contact-sub reveal">Open to internships and entry-level opportunities.<br>Feel free to reach out — I'd love to hear from you!</p>
+      <div class="contact-grid reveal">
+        <a href="mailto:amanljain.2004@gmail.com" class="contact-card">
+          <span class="contact-icon">✉️</span> amanljain.2004@gmail.com
+        </a>
+        <a href="tel:+917898299929" class="contact-card">
+          <span class="contact-icon">📞</span> +91 78982 99929
+        </a>
+        <a href="https://github.com/Amanmehta11" target="_blank" class="contact-card">
+          <span class="contact-icon">💻</span> github.com/Amanmehta11
+        </a>
+        <a href="https://linkedin.com/in/aman-mehta-23597438b" target="_blank" class="contact-card">
+          <span class="contact-icon">🔗</span> LinkedIn Profile
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Aman Mehta · Aspiring Frontend Developer · Bengaluru, Karnataka
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
